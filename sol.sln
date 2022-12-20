@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dto", "dto\dto.csproj", "{12F5E586-DF57-4E89-807C-3D153463BEDF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "data", "data\data.csproj", "{B192DABF-ED3D-49B5-B19E-57BC1D15C3D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web", "web\web.csproj", "{86CC15F0-6511-4442-8C10-65A8E2B277A1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{E96B7257-9FA5-4EB8-8D55-78AE3DA7391F}"
+	ProjectSection(SolutionItems) = preProject
+		sql\dbo.Books.Table.sql = sql\dbo.Books.Table.sql
+		sql\dbo.spBooksCreate.StoredProcedure.sql = sql\dbo.spBooksCreate.StoredProcedure.sql
+		sql\dbo.spBooksDelete.StoredProcedure.sql = sql\dbo.spBooksDelete.StoredProcedure.sql
+		sql\dbo.spBooksRead.StoredProcedure.sql = sql\dbo.spBooksRead.StoredProcedure.sql
+		sql\dbo.spBooksUpdate.StoredProcedure.sql = sql\dbo.spBooksUpdate.StoredProcedure.sql
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12F5E586-DF57-4E89-807C-3D153463BEDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12F5E586-DF57-4E89-807C-3D153463BEDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12F5E586-DF57-4E89-807C-3D153463BEDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12F5E586-DF57-4E89-807C-3D153463BEDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B192DABF-ED3D-49B5-B19E-57BC1D15C3D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B192DABF-ED3D-49B5-B19E-57BC1D15C3D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B192DABF-ED3D-49B5-B19E-57BC1D15C3D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B192DABF-ED3D-49B5-B19E-57BC1D15C3D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86CC15F0-6511-4442-8C10-65A8E2B277A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86CC15F0-6511-4442-8C10-65A8E2B277A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86CC15F0-6511-4442-8C10-65A8E2B277A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86CC15F0-6511-4442-8C10-65A8E2B277A1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {788E05D5-BAD9-4FBF-A5E8-16D8B1617D65}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,89 @@
+﻿@page
+@model biblioteca.web.Pages.Books.DeleteModel
+@{
+    ViewData["Title"] = "Delete";
+}
+<h2><strong>Delete</strong></h2>
+
+<form method="post">
+
+    @if (!@String.IsNullOrEmpty(@Model.errorMessage))
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+
+                    <strong>@Model.errorMessage</strong>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">id</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="id" value="@Model.Book.id" disabled />
+            <input type="hidden" name="idHidden" value="@Model.Book.id" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Name</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="name" value="@Model.Book.name" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">author</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="author" value="@Model.Book.author" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Pages</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="pages" value="@Model.Book.pages" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Genre</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="genre" value="@Model.Book.genre" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Year</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="year" value="@Model.Book.year" />
+        </div>
+    </div>
+
+    @if (!@String.IsNullOrEmpty(@Model.successMessage))
+    {
+        <div class="row mb-3">
+            <div class="col-sm-9">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+
+                    <strong>@Model.successMessage</strong>
+
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3">
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </div>
+
+        <div class="col-sm-3">
+            <a class="btn btn-outline-primary" href="/Books/Index" role="button">Back</a>
+        </div>
+
+    </div>
+
+</form>
