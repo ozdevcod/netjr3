@@ -12,13 +12,83 @@ namespace Appbooks.web.Pages.Books
     public class IndexModel : PageModel
     {
         public List<Book> BooksList { get; set; }
-        public Book EditableBook { get; set; } = default!;
-        public String PostType { get; set; }
+        public Book IndexBook { get; set; } = default!;
 
         public void OnGet()
         {
             BooksList = BookRead.getBooksbyId(null);
         }
+
+        public void OnPostCreate()
+        {
+            IndexBook = new()
+            {
+                Name = Request.Form["name"],
+                Author = Request.Form["author"]
+            };
+
+            if (Int32.TryParse(Request.Form["pages"].ToString(), out int pages))
+            {
+                IndexBook.Pages = pages;
+            }
+
+            IndexBook.Genre = Request.Form["genre"];
+            IndexBook.Year = Request.Form["year"];
+
+            if (IndexBook.Name.Length == 0
+                || IndexBook.Author.Length == 0
+                || IndexBook.Genre.Length == 0
+                || IndexBook.Pages == 0
+                || IndexBook.Year.Length == 0
+                )
+            {
+                return;
+            }
+
+            data.BookCreate.CreateBooks(IndexBook);
+            BooksList = BookRead.getBooksbyId(null);
+        }
+
+        public void OnPostUpdate()
+        {
+            if (!ModelState.IsValid)
+            {
+                BooksList = new();
+
+                return;
+            }
+
+            IndexBook = new Book();
+
+            if (Int32.TryParse(Request.Form["pages"].ToString(), out int iPages))
+            {
+                IndexBook.Pages = iPages;
+            }
+
+            if (Int32.TryParse(Request.Form["idHidden"].ToString(), out int iId))
+            {
+                IndexBook.Id = iId;
+            }
+
+            IndexBook.Name = Request.Form["name"];
+            IndexBook.Author = Request.Form["author"];
+            IndexBook.Genre = Request.Form["genre"];
+            IndexBook.Year = Request.Form["year"];
+
+            if (IndexBook.Name.Length == 0
+                || IndexBook.Author.Length == 0
+                || IndexBook.Genre.Length == 0
+                || IndexBook.Pages == 0
+                || IndexBook.Year.Length == 0
+                )
+            {
+                return;
+            }
+
+            UpdateBookInfo(IndexBook);
+            BooksList = BookRead.getBooksbyId(null);
+        }
+
         public void OnPostDelete()
         {
             if (!ModelState.IsValid)
@@ -34,71 +104,37 @@ namespace Appbooks.web.Pages.Books
             BooksList = BookRead.getBooksbyId(null);
         }
 
-        public void OnPostUpdate()
-        {
-            if (!ModelState.IsValid)
-            {
-                BooksList = new();
-
-                return;
-            }
-
-            EditableBook = new Book();
-
-            if (Int32.TryParse(Request.Form["pages"].ToString(), out int iPages))
-            {
-                EditableBook.Pages = iPages;
-            }
-
-            if (Int32.TryParse(Request.Form["idHidden"].ToString(), out int iId))
-            {
-                EditableBook.Id = iId;
-            }
-
-            EditableBook.Name = Request.Form["name"];
-            EditableBook.Author = Request.Form["author"];
-            EditableBook.Genre = Request.Form["genre"];
-            EditableBook.Year = Request.Form["year"];
-
-            if (EditableBook.Name.Length == 0
-                || EditableBook.Author.Length == 0
-                || EditableBook.Genre.Length == 0
-                || EditableBook.Pages == 0
-                || EditableBook.Year.Length == 0
-                )
-            {
-                return;
-            }
-
-            updateBookInfo(EditableBook);
-            BooksList = BookRead.getBooksbyId(null);
-        }
-
-        public void updateBookInfo(Book book)
+        public void UpdateBookInfo(Book book)
         {
             BookUpdate.UpdateBook(book);
         }
 
-        public PartialViewResult OnGetBookDetailsUpdate(int? id)
+        public PartialViewResult OnGetBookCreate()
         {
-            EditableBook = new();
-
-            var bookList = BookRead.getBooksbyId(id);
-
-            EditableBook = bookList.First();
-
-            return Partial("_ModalUpdateBookPartial", EditableBook);
+            IndexBook = new();
+            return Partial("_ModalCreateBookPartial", IndexBook);
         }
 
-        public PartialViewResult OnGetBookDetailsDelete(int? id)
+        public PartialViewResult OnGetBookUpdate(int? id)
         {
-            EditableBook = new();
+            IndexBook = new();
 
             var bookList = BookRead.getBooksbyId(id);
 
-            EditableBook = bookList.First();
+            IndexBook = bookList.First();
 
-            return Partial("_ModalDeleteBookPartial", EditableBook);
+            return Partial("_ModalUpdateBookPartial", IndexBook);
+        }
+
+        public PartialViewResult OnGetBookDelete(int? id)
+        {
+            IndexBook = new();
+
+            var bookList = BookRead.getBooksbyId(id);
+
+            IndexBook = bookList.First();
+
+            return Partial("_ModalDeleteBookPartial", IndexBook);
         }
     }
 }
