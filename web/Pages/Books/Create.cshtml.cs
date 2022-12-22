@@ -11,56 +11,39 @@ namespace Appbooks.web.Pages.Books
     {
         public Book Book { get; set; }
 
-        public string errorMessage { get; set; }
-        public string successMessage { get; set; }
-
         public void OnGet()
         {
-            errorMessage = string.Empty;
-            successMessage = string.Empty;
             Book = new Book();
         }
 
         public void OnPost()
         {
-            try
+
+            Book = new()
             {
-                Book = new Book();
-                Book.Name = Request.Form["name"];
-                Book.Author = Request.Form["author"];
+                Name = Request.Form["name"],
+                Author = Request.Form["author"]
+            };
 
-                int pages;
-
-                if (Int32.TryParse(Request.Form["pages"].ToString(), out pages))
-                {
-                    Book.Pages = pages;
-                }
-
-                Book.Genre = Request.Form["genre"];
-                Book.Year = Request.Form["year"];
-
-                //backend validation 
-                if (Book.Name.Length == 0
-                    || Book.Author.Length == 0
-                    || Book.Genre.Length == 0
-                    || Book.Pages == 0
-                    || Book.Year.Length == 0
-                    )
-                {
-                    errorMessage = "all fields are required";
-                    return;
-                }
-
-                CreateBook();
-
-                successMessage = "book created correctly";
-
-            }
-            catch (Exception ex)
+            if (Int32.TryParse(Request.Form["pages"].ToString(), out int pages))
             {
-                errorMessage = ex.Message;
+                Book.Pages = pages;
             }
 
+            Book.Genre = Request.Form["genre"];
+            Book.Year = Request.Form["year"];
+
+            if (Book.Name.Length == 0
+                || Book.Author.Length == 0
+                || Book.Genre.Length == 0
+                || Book.Pages == 0
+                || Book.Year.Length == 0
+                )
+            {
+                return;
+            }
+
+            CreateBook();
         }
 
         public void CreateBook()

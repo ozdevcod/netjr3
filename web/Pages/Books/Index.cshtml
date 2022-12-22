@@ -69,16 +69,24 @@
         $(function () {
             $('button.update').on('click', function () {
                 var id = $(this).data('id');
-                $('.modal-body').load(`?handler=bookdetailsupdate&id=${id}`);
-                $('.modal-title').text("Update");
+                $('.modal-body').load(`?handler=bookupdate&id=${id}`);
+                $('.modal-title').text("Update Book");
             });
         });
 
         $(function () {
             $('button.delete').on('click', function () {
                 var id = $(this).data('id');
-                $('.modal-body').load(`?handler=bookdetailsdelete&id=${id}`);
-                $('.modal-title').text("Delete");
+                $('.modal-body').load(`?handler=bookdelete&id=${id}`);
+                $('.modal-title').text("Delete Book");
+            });
+        });
+
+        $(function () {
+            $('button.create').on('click', function () {
+                var id = $(this).data('id');
+                $('.modal-body').load(`?handler=bookcreate`);
+                $('.modal-title').text("Create Book");
             });
         });
 
