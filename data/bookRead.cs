@@ -1,4 +1,4 @@
-﻿using biblioteca.dto;
+﻿using Appbooks.dto;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace biblioteca.data
+namespace Appbooks.data
 {
     public static class BookRead
     {
@@ -42,12 +42,12 @@ namespace biblioteca.data
                             {
                                 Book book = new Book();
 
-                                book.id = reader.GetInt32(0);
-                                book.name = reader.GetString(1);
-                                book.author = reader.GetString(2);
-                                book.pages = reader.GetInt16(3);
-                                book.genre = reader.GetString(4);
-                                book.year = reader.GetString(5);
+                                book.Id = reader.GetInt32(0);
+                                book.Name = reader.GetString(1);
+                                book.Author = reader.GetString(2);
+                                book.Pages = reader.GetInt16(3);
+                                book.Genre = reader.GetString(4);
+                                book.Year = reader.GetString(5);
                                 BooksList.Add(book);
                             }
                         }

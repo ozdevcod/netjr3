@@ -3,7 +3,7 @@ using System.Collections;
 using System.Data;
 using Microsoft.Data.SqlClient;
 
-namespace biblioteca.data
+namespace Appbooks.data
 {
     public struct ParamData
     {

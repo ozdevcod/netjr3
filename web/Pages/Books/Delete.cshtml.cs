@@ -1,12 +1,12 @@
-using biblioteca.data;
-using biblioteca.dto;
+using Appbooks.data;
+using Appbooks.dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace biblioteca.web.Pages.Books
+namespace Appbooks.web.Pages.Books
 {
     public class DeleteModel : PageModel
     {
@@ -44,7 +44,7 @@ namespace biblioteca.web.Pages.Books
         public void getBookInfo(int bookId)
         {
 
-            Book.id = bookId;
+            Book.Id = bookId;
 
             BooksList = BookRead.getBooksbyId(bookId);
 

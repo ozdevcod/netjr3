@@ -1,11 +1,11 @@
-using biblioteca.dto;
+using Appbooks.dto;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using System;
 using System.Dynamic;
 using System.Xml.Serialization;
 
-namespace biblioteca.web.Pages.Books
+namespace Appbooks.web.Pages.Books
 {
     public class CreateModel : PageModel
     {
@@ -26,25 +26,25 @@ namespace biblioteca.web.Pages.Books
             try
             {
                 Book = new Book();
-                Book.name = Request.Form["name"];
-                Book.author = Request.Form["author"];
+                Book.Name = Request.Form["name"];
+                Book.Author = Request.Form["author"];
 
                 int pages;
 
                 if (Int32.TryParse(Request.Form["pages"].ToString(), out pages))
                 {
-                    Book.pages = pages;
+                    Book.Pages = pages;
                 }
 
-                Book.genre = Request.Form["genre"];
-                Book.year = Request.Form["year"];
+                Book.Genre = Request.Form["genre"];
+                Book.Year = Request.Form["year"];
 
                 //backend validation 
-                if (Book.name.Length == 0
-                    || Book.author.Length == 0
-                    || Book.genre.Length == 0
-                    || Book.pages == 0
-                    || Book.year.Length == 0
+                if (Book.Name.Length == 0
+                    || Book.Author.Length == 0
+                    || Book.Genre.Length == 0
+                    || Book.Pages == 0
+                    || Book.Year.Length == 0
                     )
                 {
                     errorMessage = "all fields are required";

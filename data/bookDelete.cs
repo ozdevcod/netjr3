@@ -1,4 +1,4 @@
-﻿using biblioteca.dto;
+﻿using Appbooks.dto;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace biblioteca.data
+namespace Appbooks.data
 {
     public static class BookDelete
     {

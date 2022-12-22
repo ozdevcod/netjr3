@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Configuration;
 
-namespace biblioteca.data
+namespace Appbooks.data
 {
     public class DataAccessAdo
     {

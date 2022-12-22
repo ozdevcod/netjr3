@@ -1,5 +1,5 @@
 ﻿@page
-@model biblioteca.web.Pages.Books.IndexModel
+@model Appbooks.web.Pages.Books.IndexModel
 @{
     ViewData["Title"] = "Books";
 }
@@ -10,10 +10,12 @@
             <h2><strong>Books</strong></h2>
         </div>
         <div class="col-sm-6">
-            <a class="btn btn-primary btn-sm" href="/Books/Create">Create Book</a>
+            <a class="btn btn-primary btn-sm" href="/Books/Create">Create Page</a>
 
-            <a href="#addBookModal" class="btn btn-primary" data-toggle="modal"><em class="material-icons"></em> <span>Create Book</span></a>
-            <a href="#deleteBookModal" class="btn btn-danger" data-toggle="modal"><em class="material-icons"></em> <span>Delete Book</span></a>
+            <button type="button" class="btn btn-primary btn-sm create" data-bs-toggle="modal" data-bs-target="#modalPartial">
+                Create Modal
+            </button>
+
         </div>
     </div>
 </div>
@@ -34,18 +36,25 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            @foreach (var item in Model.BooksList)
+            @foreach (var Book in Model.BooksList)
             {
                 <tr>
-                    <td>@item.id</td>
-                    <td>@item.name</td>
-                    <td>@item.author</td>
-                    <td>@item.pages</td>
-                    <td>@item.genre</td>
-                    <td>@item.year</td>
+                    <td>@Book.Id</td>
+                    <td>@Book.Name</td>
+                    <td>@Book.Author</td>
+                    <td>@Book.Pages</td>
+                    <td>@Book.Genre</td>
+                    <td>@Book.Year</td>
                     <td>
-                        <a class="btn btn-warning btn-sm" href="/Books/Update?id=@item.id">Update</a>
-                        <a class="btn btn-danger btn-sm" href="/Books/Delete?id=@item.id">Delete</a>
+                        <a class="btn btn-warning btn-sm" href="/Books/Update?id=@Book.Id">Update<br />Page</a>
+                        <button type="button" class="btn btn-warning btn-sm update" data-bs-toggle="modal" data-bs-target="#modalPartial" data-id="@Book.Id">
+                            Update<br />Modal
+                        </button>
+                        <a class="btn btn-danger btn-sm" href="/Books/Delete?id=@Book.Id">Delete<br />Page</a>
+                        <button type="button" class="btn btn-danger btn-sm delete" data-bs-toggle="modal" data-bs-target="#modalPartial" data-id="@Book.Id">
+                            Delete<br />Modal
+                        </button>
+
                     </td>
                 </tr>
             }
@@ -53,23 +62,27 @@
         </tbody>
 
     </table>
-    <div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
 </div>
+<partial name="_modalNoFooterPartial" />
+
+@section scripts{
+    <script>
+
+        $(function () {
+            $('button.update').on('click', function () {
+                var id = $(this).data('id');
+                $('.modal-body').load(`?handler=bookdetails&id=${id}`);
+                $('.modal-title').text("Update");
+            });
+        });
+
+        $(function () {
+            $('button.delete').on('click', function () {
+                var id = $(this).data('id');
+                $('.modal-body').load(`?handler=bookdetails&id=${id}`);
+                $('.modal-title').text("Delete");
+            });
+        });
+
+    </script>
+}

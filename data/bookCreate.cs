@@ -1,4 +1,4 @@
-﻿using biblioteca.dto;
+﻿using Appbooks.dto;
 using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace biblioteca.data
+namespace Appbooks.data
 {
     public static class BookCreate
     {
@@ -21,11 +21,11 @@ namespace biblioteca.data
 
                 StoredProcedure storedProcedureCreate = new() { StoredProcedureName = "spBooksCreate" };
 
-                storedProcedureCreate.SetParam("name", System.Data.SqlDbType.VarChar, book.name);
-                storedProcedureCreate.SetParam("author", System.Data.SqlDbType.VarChar, book.author);
-                storedProcedureCreate.SetParam("pages", System.Data.SqlDbType.Int, book.pages.ToString());
-                storedProcedureCreate.SetParam("genre", System.Data.SqlDbType.VarChar, book.genre);
-                storedProcedureCreate.SetParam("year", System.Data.SqlDbType.VarChar, book.year);
+                storedProcedureCreate.SetParam("name", System.Data.SqlDbType.VarChar, book.Name);
+                storedProcedureCreate.SetParam("author", System.Data.SqlDbType.VarChar, book.Author);
+                storedProcedureCreate.SetParam("pages", System.Data.SqlDbType.Int, book.Pages.ToString());
+                storedProcedureCreate.SetParam("genre", System.Data.SqlDbType.VarChar, book.Genre);
+                storedProcedureCreate.SetParam("year", System.Data.SqlDbType.VarChar, book.Year);
 
                 spCollection.Add(storedProcedureCreate);
 

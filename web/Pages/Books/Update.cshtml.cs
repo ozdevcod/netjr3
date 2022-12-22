@@ -1,12 +1,12 @@
-using biblioteca.data;
-using biblioteca.dto;
+using Appbooks.data;
+using Appbooks.dto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace biblioteca.web.Pages.Books
+namespace Appbooks.web.Pages.Books
 {
     public class UpdateModel : PageModel
     {
@@ -37,26 +37,26 @@ namespace biblioteca.web.Pages.Books
             int iPages;
             if (Int32.TryParse(Request.Form["pages"].ToString(), out iPages))
             {
-                Book.pages = iPages;
+                Book.Pages = iPages;
             }
 
             int iId;
             if (Int32.TryParse(Request.Form["idHidden"].ToString(), out iId))
             {
-                Book.id = iId;
+                Book.Id = iId;
             }
 
-            Book.name = Request.Form["name"];
-            Book.author = Request.Form["author"];
-            Book.genre = Request.Form["genre"];
-            Book.year = Request.Form["year"];
+            Book.Name = Request.Form["name"];
+            Book.Author = Request.Form["author"];
+            Book.Genre = Request.Form["genre"];
+            Book.Year = Request.Form["year"];
 
             //backend validation 
-            if (Book.name.Length == 0
-                || Book.author.Length == 0
-                || Book.genre.Length == 0
-                || Book.pages == 0
-                || Book.year.Length == 0
+            if (Book.Name.Length == 0
+                || Book.Author.Length == 0
+                || Book.Genre.Length == 0
+                || Book.Pages == 0
+                || Book.Year.Length == 0
                 )
             {
                 errorMessage = "all fields are required";
@@ -71,7 +71,7 @@ namespace biblioteca.web.Pages.Books
 
         public void getBookInfo(int bookId)
         {
-            Book.id = bookId;
+            Book.Id = bookId;
 
             BooksList = BookRead.getBooksbyId(bookId);
 
