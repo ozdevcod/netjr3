@@ -13,28 +13,44 @@ namespace Appbooks.web.Pages.Books
     {
         public List<Book> BooksList { get; set; }
         public Book EditableBook { get; set; } = default!;
+        public String PostType { get; set; }
 
         public void OnGet()
         {
             BooksList = BookRead.getBooksbyId(null);
         }
-        public void OnPost()
+        public void OnPostDelete()
         {
             if (!ModelState.IsValid)
             {
+                BooksList = new();
+                return;
+            }
+
+            if (Int32.TryParse(Request.Form["idHidden"].ToString(), out int iId))
+            {
+                data.BookDelete.deleteBookbyId(iId);
+            }
+            BooksList = BookRead.getBooksbyId(null);
+        }
+
+        public void OnPostUpdate()
+        {
+            if (!ModelState.IsValid)
+            {
+                BooksList = new();
+
                 return;
             }
 
             EditableBook = new Book();
 
-            int iPages;
-            if (Int32.TryParse(Request.Form["pages"].ToString(), out iPages))
+            if (Int32.TryParse(Request.Form["pages"].ToString(), out int iPages))
             {
                 EditableBook.Pages = iPages;
             }
 
-            int iId;
-            if (Int32.TryParse(Request.Form["idHidden"].ToString(), out iId))
+            if (Int32.TryParse(Request.Form["idHidden"].ToString(), out int iId))
             {
                 EditableBook.Id = iId;
             }
@@ -56,34 +72,33 @@ namespace Appbooks.web.Pages.Books
 
             updateBookInfo(EditableBook);
             BooksList = BookRead.getBooksbyId(null);
-
-            
         }
 
         public void updateBookInfo(Book book)
         {
             BookUpdate.UpdateBook(book);
-
         }
-        public PartialViewResult OnGetBookDetails(int? id)
-        {
-            Book book = new() { Id = 0, Name = "" };
 
-            if (id == null)
-            {
-                return Partial("_updateBookPartial", book);
-            }
+        public PartialViewResult OnGetBookDetailsUpdate(int? id)
+        {
+            EditableBook = new();
 
             var bookList = BookRead.getBooksbyId(id);
 
-            if (bookList == null)
-            {
-                return Partial("_updateBookPartial", book);
-            }
+            EditableBook = bookList.First();
 
-            book = bookList.First();
+            return Partial("_ModalUpdateBookPartial", EditableBook);
+        }
 
-            return Partial("_updateBookPartial", book);
+        public PartialViewResult OnGetBookDetailsDelete(int? id)
+        {
+            EditableBook = new();
+
+            var bookList = BookRead.getBooksbyId(id);
+
+            EditableBook = bookList.First();
+
+            return Partial("_ModalDeleteBookPartial", EditableBook);
         }
     }
 }

@@ -1,0 +1,13 @@
+﻿@model Appbooks.dto.Book
+
+<div class="row">
+    <div class="col-sm-12">
+        <form method="post" asp-page-handler="delete">
+
+            <partial name="_BookControlsFormPartial" model="@Model" />
+
+            <partial name="_ButtonsModalDeleteCancelPartial" />
+
+        </form>
+    </div>
+</div>

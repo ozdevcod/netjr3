@@ -10,9 +10,6 @@ namespace Appbooks.web.Pages.Books
 {
     public class DeleteModel : PageModel
     {
-        public string errorMessage { get; set; }
-        public string successMessage { get; set; }
-
         public List<Book> BooksList { get; set; }
 
         public Book Book { get; set; }
@@ -33,9 +30,7 @@ namespace Appbooks.web.Pages.Books
 
         public void OnPost()
         {
-            int iId;
-
-            if (Int32.TryParse(Request.Form["idHidden"].ToString(), out iId))
+            if (Int32.TryParse(Request.Form["idHidden"].ToString(), out int iId))
             {
                 deleteBookInfo(iId);
             }
@@ -57,7 +52,6 @@ namespace Appbooks.web.Pages.Books
         public void deleteBookInfo(int id)
         {
             data.BookDelete.deleteBookbyId(id);
-            successMessage = "book deleted correctly";
             Book = new Book();
         }
 

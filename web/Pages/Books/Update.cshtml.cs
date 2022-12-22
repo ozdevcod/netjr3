@@ -10,9 +10,6 @@ namespace Appbooks.web.Pages.Books
 {
     public class UpdateModel : PageModel
     {
-        public string errorMessage { get; set; }
-        public string successMessage { get; set; }
-
         public Book Book { get; set; }
 
         public List<Book> BooksList { get; set; }
@@ -21,8 +18,7 @@ namespace Appbooks.web.Pages.Books
         {
             Book = new Book();
             string sBookId = Request.Query["id"].ToString();
-            int iBookId;
-            bool isSuccess = int.TryParse(sBookId, out iBookId);
+            bool isSuccess = int.TryParse(sBookId, out int iBookId);
 
             if (isSuccess)
             {
@@ -34,14 +30,12 @@ namespace Appbooks.web.Pages.Books
         {
             Book = new Book();
 
-            int iPages;
-            if (Int32.TryParse(Request.Form["pages"].ToString(), out iPages))
+            if (Int32.TryParse(Request.Form["pages"].ToString(), out int iPages))
             {
                 Book.Pages = iPages;
             }
 
-            int iId;
-            if (Int32.TryParse(Request.Form["idHidden"].ToString(), out iId))
+            if (Int32.TryParse(Request.Form["idHidden"].ToString(), out int iId))
             {
                 Book.Id = iId;
             }
@@ -59,13 +53,10 @@ namespace Appbooks.web.Pages.Books
                 || Book.Year.Length == 0
                 )
             {
-                errorMessage = "all fields are required";
                 return;
             }
 
             updateBookInfo(Book);
-
-            successMessage = "book updated correctly";
 
         }
 
