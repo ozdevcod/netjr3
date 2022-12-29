@@ -1,0 +1,24 @@
+﻿@model Appbooks.dto.Book
+<div class="row">
+    <div class="col-sm-12">
+        <form method="post" asp-page-handler="delete">
+            <h3 class="caption" id="modal-text"></h3>
+
+            <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading">Are you sure you want to delete the Book?</h4>
+
+                <br />
+                <h5><strong>name: @Model.Name</strong></h5>
+                <br />
+                <h5><strong>author:@Model.Author</strong></h5>
+                <br />
+
+            </div>
+
+            <input type="hidden" name="idHidden" value="@Model.Id" />
+            @* <partial name="_BookControlsFormPartial" model="@Model" /> *@
+            <partial name="_ButtonsModalDeleteCancelPartial" />
+
+        </form>
+    </div>
+</div>

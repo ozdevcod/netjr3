@@ -136,5 +136,15 @@ namespace Appbooks.web.Pages.Books
 
             return Partial("_ModalDeleteBookPartial", IndexBook);
         }
+        public PartialViewResult OnGetBookDeleteConfirmation(int? id)
+        {
+            IndexBook = new();
+
+            var bookList = BookRead.getBooksbyId(id);
+
+            IndexBook = bookList.First();
+
+            return Partial("_ModalDeleteBookConfirmationPartial", IndexBook);
+        }
     }
 }
